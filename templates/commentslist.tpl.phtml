@@ -1,0 +1,32 @@
+<div class="lw_comments">
+	
+	<div class="lw_comment_list">
+		
+		<h2>Kommentare</h2>
+		
+		<?php echo $this->pagination; ?>
+		
+		<ul>
+			<?php foreach($this->comments as $comment): ?>
+			<li>
+				<div class="lw_comment_name <?php if ($comment['poster_is_staff']): ?>lw_comment_staff<?php endif; ?>">
+					<?php if($comment['poster_url']): ?><a href="<?php echo $comment['poster_url']; ?>"><?php endif; ?>
+					<?php echo $comment['poster_name']; ?>
+					<?php if($comment['poster_url']): ?></a><?php endif; ?>
+				</div>
+				<div class="lw_comment_date"><?php echo $this->formatDate($comment['poster_datetime']); ?></div>
+				<div class="lw_comment_text"><?php echo nl2br($comment['poster_comment']); ?></div>
+				<?php if ($this->staff): ?><div class="lw_comment_adminfunctions"><a href="<?php echo $this->deleteurl.$comment['id']; ?>" onClick="return confirm('wirklilch l&ouml;schen?');">l&ouml;schen</a></div><?php endif; ?>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+		
+		<?php echo $this->pagination; ?>
+		
+	</div>
+	
+	<div class="lw_comment_form">
+		<?php echo $this->form; ?>
+	</div>
+	
+</div>
